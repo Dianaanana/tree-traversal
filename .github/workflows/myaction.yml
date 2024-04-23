@@ -1,7 +1,11 @@
-name: 🚀 Run
+name: Unittests
 
 on:
+  push:
+    branches: ["main"]
   pull_request:
+    branches: ["main"]
+    types: [opened, reopened]
 
 jobs:
   run:
@@ -13,7 +17,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🚀 Run
-        shell: bash
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Specify the Python version you want to use
+
+      - name: 📦 Install dependencies
         run: |
-          python3 main.py
+          pip install -r requirements.txt  # Assuming you have a requirements.txt file
+
+      - name: 🚀 Run script
+        run: |
+          python main.py
