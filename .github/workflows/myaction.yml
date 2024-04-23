@@ -1,26 +1,19 @@
-name: Run Unit Tests
+name: 🚀 Run
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 jobs:
-  test:
+  run:
+    name: 🚀 Run
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: 📥 Checkout
+        uses: actions/checkout@v3
         with:
-          python-version: '3.x'  # Specifică versiunea Python dorită
+          fetch-depth: 0
 
-      - name: Install dependencies
+      - name: 🚀 Run
+        shell: bash
         run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-          
-      - name: Run unit tests
-        run: |
-          python -m unittest discover -s tests
+          python3 main.py
